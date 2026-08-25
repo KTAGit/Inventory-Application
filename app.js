@@ -1,17 +1,13 @@
 import express from "express";
 import dotenv from "dotenv"
+import router from "./routes/pageRoute.js"
 
 dotenv.config()
 const app = express()
 
 
 
-app.get("/", (req, res) => {
-    res.send("HOME PAGE")
-})
-
-
-
+app.use("/", router)
 
 
 
