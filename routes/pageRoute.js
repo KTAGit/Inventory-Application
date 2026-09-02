@@ -1,4 +1,5 @@
 import express from "express"
+import { createCategories } from "../controllers/createCategories.js"
 
 const router = express.Router()
 
@@ -15,13 +16,11 @@ router.get("/categories", (req, res) => {
     res.send("THIS IS CATEGORIES")
 })
 
+router.post("/categories", createCategories)
+
 router.get("/brands", (req, res) => {
     res.send("THIS IS BRANDS")
 })
-
-
-
-
 
 
 
