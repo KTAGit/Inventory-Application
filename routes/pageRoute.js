@@ -1,5 +1,6 @@
 import express from "express"
 import { createCategory, getCategories, updateCategory, deleteCategory } from "../controllers/categoriesController.js"
+import { createBrand, getbrands, updateBrand, deleteBrand } from "../controllers/brandsController.js"
 
 const router = express.Router()
 
@@ -26,9 +27,14 @@ router.delete("/categories/:id", deleteCategory)
 
 
 // brands route
-router.get("/brands", (req, res) => {
-    res.send("THIS IS BRANDS")
-})
+router.get("/brands", getbrands)
+
+router.post("/brands", createBrand)
+
+router.put("/brands/:id", updateBrand)
+
+router.delete("/brands/:id", deleteBrand)
+
 
 
 
