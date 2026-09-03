@@ -2,13 +2,12 @@ import express from "express"
 import { createCategory, getCategories, updateCategory, deleteCategory } from "../controllers/categoriesController.js"
 import { createBrand, getbrands, updateBrand, deleteBrand } from "../controllers/brandsController.js"
 import { createProduct, getProducts, updateProduct, deleteProduct } from "../controllers/productsController.js"
+import { getOverview } from "../controllers/overviewController.js"
 
 const router = express.Router()
 
 // overview route
-router.get("/", (req, res) => {
-    res.send("THIS IS OVERVIEW")
-})
+router.get("/", getOverview)
 
 
 // product route
