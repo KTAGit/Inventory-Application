@@ -18,13 +18,15 @@ export async function getOverview(req, res){
             getProductsQuery()
         ])
 
-        res.status(200).json({
+        const overviewData = {
             productCount,
             categoryCount,
             brandCount,
             inventoryValue,
             getProducts
-        })
+        }
+
+        res.status(200).render("overview", overviewData)
         
     } catch (error) {
         res.status(500).json({

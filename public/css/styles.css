@@ -1,0 +1,65 @@
+@font-face {
+    font-family: "PlayfairDisplay";
+    src: url("../fonts/PlayfairDisplay-Regular.ttf") format("truetype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("../fonts/InterVariable.woff2") format("woff2");
+}
+
+* {
+    margin: 0;
+}
+
+body {
+    height: 100dvh;
+}
+
+
+.main-sidebar {
+    height: 100%;
+    max-width: 265px;
+    background-color: #F4F4F1;
+    padding-left: 15px;
+    border: 1px solid #8685846e;
+}
+
+.logo-wrapper {
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+.title {
+    font-family: "PlayfairDisplay";
+    font-size: 35px;
+}
+
+.sub-title {
+    font-family: "Inter";
+    font-weight: 300;
+}
+
+.sections-container {
+    display: flex;
+    flex-direction: column;
+    div {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 5px;
+        border-radius: 5px;
+        img {
+            height: 27px;
+            width: 27px;
+        }
+        span {
+            font-family: "Inter";
+            font-weight: 300;
+            font-size: 1.2rem;
+        }
+    }
+}
