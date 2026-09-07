@@ -77,7 +77,8 @@ aside {
 
 .overview-main-section {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .hero-img-title-container {
@@ -110,3 +111,30 @@ aside {
         max-width: 450px;
     }
 }
+
+.stock-detail-container {
+    margin-top: 55px;
+    width: 95%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    border-top: solid 1px #8685846e;
+    border-bottom: solid 1px #8685846e;
+    div {
+        width: 23%;
+        p {
+            font-family: "Inter";
+            color: #0b0b0bc7;
+        }
+        h2 {
+            font-family: "PlayfairDisplay";
+        }
+        border-right: solid 1px #8685846e;
+        margin-right: 20px;
+    }
+    .inventory-value-container {
+        border-right: none !important;
+    }
+}
+
+
