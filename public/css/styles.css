@@ -137,4 +137,99 @@ aside {
     }
 }
 
+.recent-stock-items-container {
+    width: 95%;
+    display: grid;
+    grid-template-columns: 1fr .5fr;
+    gap: 20px;
+    margin-top: 50px;
+}
 
+.recently-added-title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #8685846e;
+    margin-bottom: 20px;
+    a {
+        text-decoration: none;
+        color: #0b0b0bc7;
+        font-family: "Inter";
+        font-size: .7rem;
+        align-self: self-end;
+        margin-bottom: 5px;
+    }
+
+    h2 {
+
+        font-family: "PlayfairDisplay";
+        margin-bottom: 5px;
+    }
+}
+
+.item-card {
+    width: fit-content;
+    font-family: "Inter";
+    .title {
+        font-family: "Inter";
+        font-size: 1.2rem;
+    }
+    .category-price {
+        font-size: .8rem;
+        color: #0b0b0bc7;
+    }
+    img {
+        height: 350px;
+        width: 250px;
+        object-fit:none;
+    }
+}
+
+.low-stock-alert-wrapper {
+    padding: 20px;
+    border: 1px solid #8685846e;
+    
+    h2 {
+        display: flex;
+        text-align: center;
+        gap: 7px;
+        border-bottom: 1px solid #8685846e;
+        font-family: "PlayfairDisplay";
+        padding-bottom: 5px;
+        img {
+            width: 25px;
+            height: 25px;
+            align-self: flex-end;
+        }
+    }
+}
+
+.low-stock-items-detail-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #8685846e;
+    align-items: center;
+    font-family: "Inter";
+    margin-top: 20px;
+}
+
+.current-item-count {
+    color: #B91A1A;
+    font-size: .8rem;
+    span {
+        font-size: 1rem;
+    }
+}
+
+.low-stock-title {
+    margin-bottom: 5px;
+}
+
+.low-stock-category {
+    margin-bottom: 5px;
+}
+
+.low-stock-category {
+    color: #0b0b0bc7;
+    font-size: .7rem;
+}
