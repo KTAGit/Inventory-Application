@@ -8,19 +8,19 @@
     <div class="stock-detail-container">
         <div class="total-products-container">
             <p>Total Products</p>
-            <h2>248</h2>
+            <h2><%=overviewData.productCount.count%></h2>
         </div>
         <div class="categories-container">
             <p>Categories</p>
-            <h2>9</h2>
+            <h2><%=overviewData.categoryCount.count%></h2>
         </div>
         <div class="brands-container">
             <p>Brands</p>
-            <h2>31</h2>
+            <h2><%=overviewData.brandCount.count%></h2>
         </div>
         <div class="inventory-value-container">
             <p>Inventory Value</p>
-            <h2>$82,490</h2>
+            <h2>$<%=overviewData.inventoryValue.sum%></h2>
         </div>
     </div>
     <div class="recent-stock-items-container">
@@ -29,22 +29,30 @@
                 <h2>Recently Added</h2>
                 <a href="/products">View All</a>
             </div>
-            <div class="item-card">
-                <img src="/images/Guitar.jpg" alt="">
-                <p class="title">Title</p>
-                <p class="category-price">Category • Price</p>
+            <div class="cards-container">
+                <% items.forEach((card) => { %>
+                    <div class="item-card"> 
+                        <img src=<%=card.itemImg%> alt=""> 
+                        <p class="title"><%=card.itemName%></p> 
+                        <p class="category-price"><%=card.categoryName%> • <%=card.itemPrice%></p> 
+                    </div> 
+                <% }) %>
+                
             </div>
         </div>
         <div class="low-stock-alert-wrapper">
-            <h2 class="low-stock-title"> <img src="/icons/alert-symbol.png" alt=""> Low Stock</h2>
-            <div class="low-stock-items-detail-wrapper">
-                <div class="low-stock-item-detail-wrapper">
-                    <p class="low-stock-title">Item title</p>
-                    <p class="low-stock-category">Category</p>
-                </div>
-                <p class="current-item-count"><span>•</span> 2 left</p>
-            </div>
-            
+            <h2 class="low-stock-title-icon"> <img src="/icons/alert-symbol.png" alt=""> Low Stock</h2>
+                <% items.forEach((card) => { %>
+                    <% if(card.stockCount < 5) { %>
+                        <div class="low-stock-items-detail-wrapper">
+                            <div class="low-stock-item-detail-wrapper">
+                                <p class="low-stock-title"><%=card.itemName%></p>
+                                <p class="low-stock-category"><%=card.categoryName%></p>
+                            </div>
+                            <p class="current-item-count"><span>•</span><%=card.stockCount%> left</p>
+                        </div>
+                    <% } %>
+                <% }) %>
         </div>
     </div>
 </section>

@@ -10,6 +10,11 @@ export function getCategoriesQuery(){
     return pool.query(`SELECT * FROM categories`)
 }
 
+export async function getCategoryById(id) {
+    const result = await pool.query(`SELECT name FROM categories WHERE id = ($1)`, [id])
+    return result.rows
+}
+
 export function updateCategoryQuery(id, categoryName, description){
     return pool.query(`UPDATE categories
         SET name = ($1), description = ($2)

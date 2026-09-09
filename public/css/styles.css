@@ -12,11 +12,14 @@
 * {
     margin: 0;
     letter-spacing: 1.5px;
-    overflow: hidden;
+    box-sizing: border-box;
+}
+html {
+    height: 100%;
 }
 
 body {
-    height: 100dvh;
+    height: 100%;
     display: grid;
     grid-template-columns: 265px 1fr;
 }
@@ -75,14 +78,22 @@ aside {
     }
 }
 
+.main-content {
+    min-height: 0;
+    overflow: hidden;
+}
+
 .overview-main-section {
+    height: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
+    overflow-y: auto;
 }
 
 .hero-img-title-container {
-    height: 350px;
+    min-height: 350px;
+    max-height: 350px;
     width: 95%;
     border-radius: 10px;
     margin-top: 50px;
@@ -120,6 +131,8 @@ aside {
     align-items: center;
     border-top: solid 1px #8685846e;
     border-bottom: solid 1px #8685846e;
+    padding-bottom: 20px;
+    padding-top: 20px;
     div {
         width: 23%;
         p {
@@ -166,10 +179,16 @@ aside {
     }
 }
 
+.cards-container {
+    display: flex;
+    gap: 20px;
+}
+
 .item-card {
     width: fit-content;
     font-family: "Inter";
     .title {
+        max-width: 250px;
         font-family: "Inter";
         font-size: 1.2rem;
     }
@@ -221,7 +240,7 @@ aside {
     }
 }
 
-.low-stock-title {
+.low-stock-title-icon {
     margin-bottom: 5px;
 }
 
@@ -232,4 +251,9 @@ aside {
 .low-stock-category {
     color: #0b0b0bc7;
     font-size: .7rem;
+}
+
+.low-stock-title {
+    max-width: 300px;
+    margin-bottom: 5px;
 }

@@ -1,18 +1,22 @@
 import { pool } from "./db.js";
 
 
-export function productCountQuery(){
-    return pool.query(`SELECT COUNT(*) FROM products`)
+export async function productCountQuery(){
+    const result = await pool.query(`SELECT COUNT(*) FROM products`)
+    return result.rows[0]
 }
 
-export function inventoryValueQuery(){
-    return pool.query(`SELECT SUM(price * current_stock) FROM products`)
+export async function inventoryValueQuery(){
+    const result = await pool.query(`SELECT SUM(price * current_stock) FROM products`)
+    return result.rows[0]
 }
 
-export function categoryCountQuery(){
-    return pool.query(`SELECT COUNT(*) FROM categories`)
+export async function categoryCountQuery(){
+    const result = await pool.query(`SELECT COUNT(*) FROM categories`)
+    return result.rows[0]
 }
 
-export function brandCountQuery(){
-    return pool.query(`SELECT COUNT(*) FROM brands`)
+export async function brandCountQuery(){
+    const result = await pool.query(`SELECT COUNT(*) FROM brands`)
+    return result.rows[0]
 }
