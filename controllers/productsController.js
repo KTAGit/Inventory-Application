@@ -1,5 +1,5 @@
 import { createProductQuery, getProductsQuery, updateProductQuery, deleteProductQuery } from "../model/productQueries.js";
-
+import { getCategoryById } from "../model/categoryQueries.js";
 
 export async function createProduct(req, res) {
     try {
@@ -21,11 +21,8 @@ export async function createProduct(req, res) {
 export async function getProducts(req, res) {
     try {
         const result = await getProductsQuery()
-
-        res.status(200).json({
-            message: "Products retrieved",
-            categories: result.rows
-        })
+        const finalResult = await getProductWithCateogry(result)
+        res.status(200).render("products", {products: finalResult})
     } catch (error) {
         res.status(500).json({
             error: "Failed to retrieve products"
@@ -64,4 +61,21 @@ export async function deleteProduct(req, res) {
             error: "Failed to delete product"
         })
     }
+}
+
+export async function getProductWithCateogry(products) {
+    const result = await Promise.all(
+        products.rows.map(async (item) => {
+        const result = await getCategoryById(item.category_id)
+        return  {
+                    itemName: item.name, 
+                    itemPrice: item.price, 
+                    itemImg: item.image_url,
+                    categoryName: result[0].name,
+                    stockCount: item.current_stock
+                }
+
+        })
+    )
+    return result   
 }

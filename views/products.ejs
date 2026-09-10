@@ -1,3 +1,39 @@
 <section class="products-section">
-    
+    <div class="products-heading">
+        <div class="title-wrapper">
+            <h1>Products</h1>
+            <p>Everything on the shelves, in one place.</p>
+        </div>
+        <div class="add-product-wrapper">
+            <button>+ Add product</button>
+        </div>
+    </div>
+    <div class="search-filter-wrapper">
+        <form action="#">
+            <input type="text" placeholder="Search Inventory...">
+        </form>
+        <div class="filter-wrapper">
+            <button>Category</button>
+            <button>Brand</button>
+            <button>Stock</button>
+        </div>
+    </div>
+    <div class="products-container">
+        <% products?.forEach((card) => { %>
+            <div class="item-card">
+                <img src=<%=card.itemImg%> alt=""> 
+                <div class="category-price-wrapper">
+                    <p class="category-price"><%=card.categoryName%></p> 
+                    <p>$<%=card.itemPrice%></p>
+                </div> 
+                <p class="title"><%=card.itemName%></p> 
+                <p class="stock-count">
+                    <span style="color: <%=card.stockCount < 5 ? '#B91A1A' : card.stockCount < 10 ? '#F3A161': 'black'%>;">•</span>
+                    <%=card.stockCount < 10 ? 'Low Stock' : 'In Stock' %> (<%=card.stockCount%>)
+                </p>
+                
+                
+            </div> 
+        <% }) %>
+    </div>
 </section>

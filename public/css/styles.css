@@ -257,3 +257,106 @@ aside {
     max-width: 300px;
     margin-bottom: 5px;
 }
+
+.category-price-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.products-section {
+    width: 100%;
+    display: flex;
+    padding-top: 50px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.products-heading {
+    display: flex;
+    align-items: end;
+    width: 95%;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.title-wrapper {
+    h1 {
+        font-family: "PlayfairDisplay";
+        font-size: 2.5rem;
+    }
+    p {
+        font-family:"Inter";
+        font-weight: 300;
+        color: #0b0b0bee;
+    }
+}
+
+.add-product-wrapper {
+    button {
+        font-family: "Inter";
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 15px;
+        padding-right: 15px;
+        border: 1px solid #000000;
+        background-color: #000000;
+        color: #FFFFFF;
+    }
+    button:hover {
+        cursor: pointer;
+    }
+    
+}
+
+.search-filter-wrapper {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #8685846e;
+    align-items: end;
+    form {
+        input {
+            width: 350px;
+            height: 35px;
+            font-family: "Inter";
+            font-size: 1rem;
+        } 
+    }
+}
+
+.filter-wrapper {
+    button {
+        font-family: "Inter";
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 15px;
+        padding-right: 15px;
+        border: 1px solid #8685846e;
+        background-color: transparent;
+    }
+    button:hover {
+        cursor: pointer;
+    }
+}
+
+.stock-count {
+    font-size: .8rem;
+    color: #0b0b0bc7;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    span {
+        font-size: 1.5rem;
+        padding-bottom: 3px;
+    }
+}
+
+.products-container {
+    display: grid;
+    width: 95%;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
