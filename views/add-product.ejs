@@ -1,0 +1,81 @@
+<div class="tint">
+
+    <section class="add-product-section">
+    <div class="title-wrapper">
+        <h1>Add something new.</h1>
+        <p>Put anther instrument on the shelves.</p>
+    </div>
+    <form action="/products/add-product" method="POST">
+        <div class="name-wrapper">
+            <label for="productName">NAME*</label>
+            <input type="text" name="productName" placeholder="e.g. Vintage Gibson Les Paul" required >
+        </div>
+        <div class="description-wrapper">
+            <label for="description">DESCRIPTION</label>
+            <textarea name="description" id="" placeholder="Discribe the instruments tone, history, and features..."></textarea>
+        </div>
+        <div class="brand-category-wrapper">
+            <div class="brand-wrapper">
+                <label for="brand">BRAND*</label>
+                <select name="brandId" id="" required>
+                    <option value="" disabled selected>Select Brand</option>
+                    <%brands.map((brand) => { %>
+                        <option value=<%=brand.id%>><%=brand.name%></option>
+                    <% })%>
+                </select>
+            </div>
+            
+            <div class="categories-wrapper">
+                <label for="category">CATEGORY*</label>
+                <select name="categoryId" id="" required>
+                    <option value="" disabled selected>Select Category</option>
+                    <%categories.map((category) => { %>
+                        <option value=<%=category.id%>><%=category.name%></option>
+                    <% })%>
+                </select>
+            </div>
+        </div>
+        <div class="price-stock-wrapper">
+            <div class="price-wrapper">
+                <label for="price">PRICE ($)*</label>
+                <input type="number" name="price" placeholder="0.00" required>
+            </div>
+            <div class="stock-wrapper">
+                <label for="initial-stock">INITIAL STOCK*</label>
+                <input type="number" name="currentStock" placeholder="0" required>
+            </div>
+        </div>
+        <div class="condition-wrapper">
+            <label for="condition">CONDITION</label>
+            <div class="radio-input-wrapper">
+                <div>
+                    <input type="radio" name="condition" value="Brand New" id="">
+                    <label for="Brand New">Brand New</label>
+                </div>
+                <div>   
+                    <input type="radio" name="condition" value="Mint">
+                    <label for="Mint">Mint</label>
+                </div>
+                <div>   
+                    <input type="radio" name="condition" value="Used (Good)" id="">
+                    <label for="Used (Good)">Used (Good)</label>
+                </div>
+                <div>
+                    <input type="radio" name="condition" value="Vintage" id="">
+                    <label for="Vintage">Vintage</label>
+                </div>
+            </div>
+        </div>
+        <div class="image-url-wrapper">
+            <label for="image-url">IMAGE URL</label>
+            <input type="text" name="imgUrl" placeholder="https://...">
+        </div>
+        
+        <div class="button-wrapper">
+            <a class="cancel-button" href="/products">CANCEL</a>
+            <button class="add-product-button" type="submit">ADD PRODUCT</button>
+        </div>
+    </form>
+</section>
+
+</div>

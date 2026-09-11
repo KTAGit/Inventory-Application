@@ -3,6 +3,7 @@ import { createCategory, getCategories, updateCategory, deleteCategory } from ".
 import { createBrand, getbrands, updateBrand, deleteBrand } from "../controllers/brandsController.js"
 import { createProduct, getProducts, updateProduct, deleteProduct } from "../controllers/productsController.js"
 import { getOverview } from "../controllers/overviewController.js"
+import { addProduct } from "../controllers/productsController.js"
 
 const router = express.Router()
 
@@ -13,7 +14,8 @@ router.get("/", getOverview)
 // product route
 router.get("/products", getProducts)
 
-router.post("/products", createProduct)
+router.get("/products/add-product", addProduct)
+router.post("/products/add-product", createProduct)
 
 router.put("/products/:id", updateProduct)
 

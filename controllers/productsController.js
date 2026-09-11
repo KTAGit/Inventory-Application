@@ -1,5 +1,7 @@
 import { createProductQuery, getProductsQuery, updateProductQuery, deleteProductQuery } from "../model/productQueries.js";
 import { getCategoryById } from "../model/categoryQueries.js";
+import { getCategoriesQuery } from "../model/categoryQueries.js";
+import { getbrandsQuery } from "../model/brandsQueries.js";
 
 export async function createProduct(req, res) {
     try {
@@ -7,11 +9,8 @@ export async function createProduct(req, res) {
         console.log(productName, description, brandId, categoryId, currentStock, price, condition, imgUrl)
         await createProductQuery(productName, description, brandId, categoryId, currentStock, price, condition, imgUrl)
 
-        res.status(201).json({
-            message: "Product created"
-        })
+        res.status(201).redirect("/products")
     } catch (error) {
-        console.log(error)
         res.status(500).json({
             error: "Failed to create product"
         })
@@ -78,4 +77,26 @@ export async function getProductWithCateogry(products) {
         })
     )
     return result   
+}
+
+export async function addProduct(req, res) {
+    try {
+        const inputData = await Promise.all([
+            {
+                categories: await getCategoriesQuery(),
+                brands: await getbrandsQuery()
+            }
+        ])
+        res.status(200).render("add-product", 
+            {
+                categories: inputData[0].categories.rows,
+                brands: inputData[0].brands.rows
+            }
+        )
+    } catch (error) {
+        res.status(500).json({
+            error: "Internal server error"
+        })
+    }
+
 }
