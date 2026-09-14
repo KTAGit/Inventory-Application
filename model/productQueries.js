@@ -30,3 +30,10 @@ export function deleteProductQuery(id){
         WHERE id = ($1)
          `, [id])
 }
+
+export function getProductByIdQuery(id) {
+    return pool.query(`
+        SELECT * FROM products
+        WHERE id = ($1)
+        `,[id])
+}

@@ -1,7 +1,7 @@
 import express from "express"
 import { createCategory, getCategories, updateCategory, deleteCategory } from "../controllers/categoriesController.js"
 import { createBrand, getbrands, updateBrand, deleteBrand } from "../controllers/brandsController.js"
-import { createProduct, getProducts, updateProduct, deleteProduct } from "../controllers/productsController.js"
+import { createProduct, getProducts, updateProduct, deleteProduct, getProductById, deleteConfirmation } from "../controllers/productsController.js"
 import { getOverview } from "../controllers/overviewController.js"
 import { addProduct } from "../controllers/productsController.js"
 
@@ -17,9 +17,11 @@ router.get("/products", getProducts)
 router.get("/products/add-product", addProduct)
 router.post("/products/add-product", createProduct)
 
-router.put("/products/:id", updateProduct)
+router.get("/products/:id", getProductById)
+router.post("/products/:id", updateProduct)
 
-router.delete("/products/:id", deleteProduct)
+router.get("/products/delete/:id", deleteConfirmation)
+router.post("/products/delete/:id", deleteProduct)
 
 
 // category route

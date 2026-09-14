@@ -189,6 +189,8 @@ aside {
     font-family: "Inter";
     background-color: #F4F4F1;
     border-bottom: 1px solid #8685846e;
+    animation: scaleDown 0.2s ease-in-out;
+    
     .title {
         max-width: 250px;
         font-family: "Inter";
@@ -203,6 +205,30 @@ aside {
         width: 250px;
         object-fit:none;
     }
+}
+
+@keyframes scaleUp {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.02);
+    }
+}
+
+@keyframes scaleDown {
+    0% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.item-card:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+    animation: scaleUp 0.2s ease-in-out;
 }
 
 .low-stock-alert-wrapper {
@@ -267,11 +293,12 @@ aside {
 
 .products-section {
     width: 100%;
+    height: 100%;
     display: flex;
     padding-top: 50px;
     flex-direction: column;
     align-items: center;
-    overflow-y: scroll;
+    overflow-y: scroll !important;
 }
 
 .products-heading {
@@ -308,6 +335,10 @@ aside {
     }
 }
 
+.add-product-button:hover {
+    cursor: pointer;
+}
+
 .button-wrapper {
     button, a {
         font-family: "Inter";
@@ -328,6 +359,14 @@ aside {
         padding-left: 25px;
         padding-right: 25px;
         font-weight: 300;
+    }
+    .delete-button {
+        background-color: #FFFFFF;
+        border: 1px solid #B91A1A;
+        color: #B91A1A;
+    }
+    .delete-button:hover {
+        cursor: pointer;
     }
 }
 
@@ -508,6 +547,88 @@ aside {
 .tint {
     height: 100%;
     width: 100%;
-    padding-top: 20%;
+    padding-top: 5dvh;
     background-image: linear-gradient(rgba(0,0,0,0.5));
+}
+
+.image-name-wrapper {
+    display: flex;
+    gap: 10px;
+    img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.delete-confirmation-title-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    h2 {
+        font-weight: 500;
+    }
+    .image-name-wrapper {
+        width: 450px;
+        background-color: #F4F4F1;
+        border: 1px solid #8685846e;
+        padding: 10px;
+    }
+
+    .warning-message {
+        width: 450px;
+        text-align: center;
+        font-family: "Inter";
+        color: #040404a8;
+    }
+}
+
+.delete-product-section {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    justify-self: center;
+    align-self: center;
+    padding: 50px;
+    border: 1px solid #8685846e;
+    background-color: #FFFFFF;
+    form {
+        margin-top: 25px;
+    }
+}
+
+.delete-confirmation-button-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+     button, a {
+        font-family: "Inter";
+        font-weight: 500;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 15px;
+        padding-right: 15px;
+        border: 1px solid #000000;
+        background-color: #000000;
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+    a {
+        background-color: #FFFFFF;
+        color: #000000;
+        border: 1px solid #0000008a;
+        padding-left: 25px;
+        padding-right: 25px;
+        font-weight: 300;
+    }
+    .delete-button {
+        background-color: #FFFFFF;
+        border: 1px solid #B91A1A;
+        color: #B91A1A;
+    }
+    .delete-button:hover {
+        cursor: pointer;
+    }
 }

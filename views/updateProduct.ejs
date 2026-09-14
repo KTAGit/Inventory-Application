@@ -1,0 +1,91 @@
+<div class="tint">
+
+    <section class="add-product-section">
+    <div class="title-wrapper">
+        <h1>Edit product</h1>
+    </div>
+    <form action="/products/<%=product.id%>" method="POST">
+        <div class="name-wrapper">
+            <label for="productName">NAME*</label>
+            <input type="text" value="<%=product.name%>" name="productName" placeholder="e.g. Vintage Gibson Les Paul" required >
+        </div>
+        <div class="description-wrapper">
+            <label for="description">DESCRIPTION</label>
+            <textarea name="description" id="" placeholder="Discribe the instruments tone, history, and features..."><%=product.description%></textarea>
+        </div>
+        <div class="brand-category-wrapper">
+            <div class="brand-wrapper">
+                <label for="brand">BRAND*</label>
+                <select name="brandId" id="" required>
+                    
+                    <%brands.map((brand) => { %>
+                        <%if(brand.id === product.brand) {%>
+                            <option value="<%=brand.id%>" selected><%=brand.name%></option>
+                        <%}%> 
+                        
+                        <%if(brand.id !== product.brand) {%>
+                            <option value=<%=brand.id%>><%=brand.name%></option>
+                        <%}%> 
+                    <% })%>
+                </select>
+            </div>
+            
+            <div class="categories-wrapper">
+                <label for="category">CATEGORY*</label>
+                <select name="categoryId" id="" required>
+                    
+                    <%categories.map((category) => { %>
+                        <%if(category.id === product.category_id) {%>
+                            <option value="<%=category.id%>" selected><%=category.name%></option>
+                        <%}%>
+                        <%if(category.id !== product.category_id) {%>
+                            <option value=<%=category.id%>><%=category.name%></option>
+                        <%}%>  
+                    <% })%>
+                </select>
+            </div>
+        </div>
+        <div class="price-stock-wrapper">
+            <div class="price-wrapper">
+                <label for="price">PRICE ($)*</label>
+                <input type="number" value="<%=product.price%>" name="price" placeholder="0.00" required>
+            </div>
+            <div class="stock-wrapper">
+                <label for="initial-stock">INITIAL STOCK*</label>
+                <input type="number" value="<%=product.current_stock%>" name="currentStock" placeholder="0" required>
+            </div>
+        </div>
+        <div class="condition-wrapper">
+            <label for="condition">CONDITION</label>
+            <div class="radio-input-wrapper">
+                <div>
+                    <input type="radio" name="condition" value="New" <%=product.condition === 'New' ? 'checked' : '' %>>
+                    <label for="Brand New">Brand New</label>
+                </div>
+                <div>   
+                    <input type="radio" name="condition" value="Mint" <%=product.condition === 'Mint' ? 'checked' : '' %>>
+                    <label for="Mint">Mint</label>
+                </div>
+                <div>   
+                    <input type="radio" name="condition" value="Used" <%=product.condition === 'Used' ? 'checked' : '' %>>
+                    <label for="Used (Good)">Used (Good)</label>
+                </div>
+                <div>
+                    <input type="radio" name="condition" value="Vintage" <%=product.condition === 'Vintage' ? 'checked' : '' %>>
+                    <label for="Vintage">Vintage</label>
+                </div>
+            </div>
+        </div>
+        <div class="image-url-wrapper">
+            <label for="image-url">IMAGE URL</label>
+            <input type="text" value="<%=product.image_url%>" name="imgUrl" placeholder="https://...">
+        </div>
+        
+        <div class="button-wrapper">
+            <a class="delete-button" href="/products/delete/<%=product.id%>">DELETE PRODUCT</a>
+            <button class="add-product-button" type="submit">UPDATE PRODUCT</button>
+        </div>
+    </form>
+</section>
+
+</div>

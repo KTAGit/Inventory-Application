@@ -1,0 +1,23 @@
+<div class="tint">
+
+<section class="delete-product-section">
+    <div class="delete-confirmation-title-wrapper">
+        <h2>Remove this product?</h2>
+        <div class="image-name-wrapper">
+            <img src="<%=product.image_url%>" alt="">
+            <div>
+                <p class="product-category"><%=product.category.name%></p>
+                <p class="product-name"><%=product.name%></p>
+            </div>
+        </div>
+        <p class="warning-message">This will permanently remove this product from your inventory. This action cannot be undone.</p>
+    </div>
+    <form action="/products/delete/<%=product.id%>" method="POST">
+        <div class="delete-confirmation-button-wrapper">
+            <a class="cancel-button" href="/products">CANCEL</a>
+            <button class="delete-button" type="submit">DELETE PRODUCT</button>
+        </div>
+    </form>
+</section>
+
+</div>

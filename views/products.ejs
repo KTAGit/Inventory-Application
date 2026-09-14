@@ -20,18 +20,25 @@
     </div>
     <div class="products-container">
         <% products?.forEach((card) => { %>
-            <div class="item-card">
+            <a href="/products/<%=card.itemId%>" class="card-link">
+                <div class="item-card">
                 <img src=<%=card.itemImg%> alt=""> 
                 <div class="category-price-wrapper">
                     <p class="category-price"><%=card.categoryName%></p> 
                     <p>$<%=card.itemPrice%></p>
                 </div> 
-                <p class="title"><%=card.itemName%></p> 
+                <p class="title"> ><%=card.itemName%></p> 
                 <p class="stock-count">
                     <span style="color: <%=card.stockCount < 5 ? '#B91A1A' : card.stockCount < 10 ? '#F3A161': 'black'%>;">•</span>
                     <%=card.stockCount < 10 ? 'Low Stock' : 'In Stock' %> (<%=card.stockCount%>)
                 </p>
             </div> 
+            </a>
+            
         <% }) %>
     </div>
 </section>
+
+<script>
+
+</script>

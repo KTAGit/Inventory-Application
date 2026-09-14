@@ -2,11 +2,11 @@ import { createProductQuery, getProductsQuery, updateProductQuery, deleteProduct
 import { getCategoryById } from "../model/categoryQueries.js";
 import { getCategoriesQuery } from "../model/categoryQueries.js";
 import { getbrandsQuery } from "../model/brandsQueries.js";
+import { getProductByIdQuery } from "../model/productQueries.js";
 
 export async function createProduct(req, res) {
     try {
         const {productName, description, brandId, categoryId, currentStock, price, condition, imgUrl} = req.body
-        console.log(productName, description, brandId, categoryId, currentStock, price, condition, imgUrl)
         await createProductQuery(productName, description, brandId, categoryId, currentStock, price, condition, imgUrl)
 
         res.status(201).redirect("/products")
@@ -33,12 +33,10 @@ export async function updateProduct(req, res) {
     try {
         const {id} = req.params
         const {productName, description, brandId, categoryId, currentStock, price, condition, imgUrl} = req.body
-
+        console.log(id, productName, description, brandId, categoryId, currentStock, price, condition, imgUrl)
         await updateProductQuery(id ,productName, description, brandId, categoryId, currentStock, price, condition, imgUrl)
-
-        res.status(200).json({
-            message: "Product updated"
-        })
+        console.log(id ,productName, description, brandId, categoryId, currentStock, price, condition, imgUrl)
+        res.status(200).redirect("/products")
     } catch (error) {
         res.status(500).json({
             error: "Failed to update product"
@@ -52,9 +50,7 @@ export async function deleteProduct(req, res) {
 
         await deleteProductQuery(id)
 
-        res.status(200).json({
-            message: "Product deleted"
-        })
+        res.redirect("/products")
     } catch (error) {
         res.status(500).json({
             error: "Failed to delete product"
@@ -67,6 +63,7 @@ export async function getProductWithCateogry(products) {
         products.rows.map(async (item) => {
         const result = await getCategoryById(item.category_id)
         return  {
+                    itemId: item.id,
                     itemName: item.name, 
                     itemPrice: item.price, 
                     itemImg: item.image_url,
@@ -99,4 +96,51 @@ export async function addProduct(req, res) {
         })
     }
 
+}
+
+export async function getProductById(req, res) {
+    try {
+        const {id} = req.params
+        const product = await getProductByIdQuery(id)
+        const {name, description, brand, category_id, current_stock, price, condition, image_url} = product.rows[0]
+        const result = {
+            id: id, 
+            name: name, 
+            description: description, 
+            brand: brand, 
+            category_id: category_id, 
+            current_stock: current_stock, 
+            price: price, 
+            condition: condition, 
+            image_url: image_url
+        }
+        const brands = await getbrandsQuery()
+        const categories = await getCategoriesQuery()
+        console.log(result.condition)
+        res.status(200).render("updateProduct", {product:result, brands: brands.rows, categories: categories.rows})
+    } catch (error) {
+        res.status(500).json({
+            error: "Internal server error"
+        })
+    }
+}
+
+export async function deleteConfirmation(req, res) {
+    try {
+        const {id} = req.params
+        const product = await getProductByIdQuery(id)
+        const {name, image_url, category_id} = product.rows[0]
+        const category = await getCategoryById(category_id)
+        const result = {
+            id: id,
+            name: name,
+            image_url: image_url,
+            category: category[0]
+        }
+        res.status(200).render("deleteConfirmation", {product: result})
+    } catch (error) {
+        res.status(500).json({
+            error: "Internal server error"
+        })
+    }
 }
