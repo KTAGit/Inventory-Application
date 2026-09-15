@@ -1,5 +1,5 @@
 import { createProductQuery, getProductsQuery, updateProductQuery, deleteProductQuery } from "../model/productQueries.js";
-import { getCategoryById } from "../model/categoryQueries.js";
+import { getCategoryByIdQuery } from "../model/categoryQueries.js";
 import { getCategoriesQuery } from "../model/categoryQueries.js";
 import { getbrandsQuery } from "../model/brandsQueries.js";
 import { getProductByIdQuery } from "../model/productQueries.js";
@@ -33,9 +33,8 @@ export async function updateProduct(req, res) {
     try {
         const {id} = req.params
         const {productName, description, brandId, categoryId, currentStock, price, condition, imgUrl} = req.body
-        console.log(id, productName, description, brandId, categoryId, currentStock, price, condition, imgUrl)
         await updateProductQuery(id ,productName, description, brandId, categoryId, currentStock, price, condition, imgUrl)
-        console.log(id ,productName, description, brandId, categoryId, currentStock, price, condition, imgUrl)
+        
         res.status(200).redirect("/products")
     } catch (error) {
         res.status(500).json({
@@ -61,7 +60,7 @@ export async function deleteProduct(req, res) {
 export async function getProductWithCateogry(products) {
     const result = await Promise.all(
         products.rows.map(async (item) => {
-        const result = await getCategoryById(item.category_id)
+        const result = await getCategoryByIdQuery(item.category_id)
         return  {
                     itemId: item.id,
                     itemName: item.name, 
@@ -116,7 +115,7 @@ export async function getProductById(req, res) {
         }
         const brands = await getbrandsQuery()
         const categories = await getCategoriesQuery()
-        console.log(result.condition)
+
         res.status(200).render("updateProduct", {product:result, brands: brands.rows, categories: categories.rows})
     } catch (error) {
         res.status(500).json({
@@ -130,7 +129,7 @@ export async function deleteConfirmation(req, res) {
         const {id} = req.params
         const product = await getProductByIdQuery(id)
         const {name, image_url, category_id} = product.rows[0]
-        const category = await getCategoryById(category_id)
+        const category = await getCategoryByIdQuery(category_id)
         const result = {
             id: id,
             name: name,

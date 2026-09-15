@@ -1,4 +1,4 @@
-import { createBrandQuery, getbrandsQuery, updateBrandQuery, deleteBrandQuery } from "../model/brandsQueries.js";
+import { createBrandQuery, getbrandsQuery, updateBrandQuery, deleteBrandQuery, getBrandByIdQuery } from "../model/brandsQueries.js";
 
 
 export async function createBrand(req, res) {
@@ -7,9 +7,7 @@ export async function createBrand(req, res) {
         
         await createBrandQuery(brandName)
 
-        res.status(201).json({
-            message: "Brand created"
-        })
+        res.status(201).redirect("/brands")
     } catch (error) {
         res.status(500).json({
             error: "Failed to create brand"
@@ -21,10 +19,7 @@ export async function getbrands(req, res) {
     try {
         const result = await getbrandsQuery()
 
-        res.status(200).json({
-            message: "Brands retrieved",
-            brands: result.rows
-        })
+        res.status(200).render("brands", {brands: result.rows})
     } catch (error) {
         res.status(500).json({
             error: "Failed to retrieve brands"
@@ -35,13 +30,11 @@ export async function getbrands(req, res) {
 export async function updateBrand(req, res) {
     try {
         const {id} = req.params
-        const {brandName} = req.body
+        const {name} = req.body
 
-        await updateBrandQuery(id ,brandName)
+        await updateBrandQuery(id ,name)
 
-        res.status(200).json({
-            message: "Brand updated"
-        })
+        res.status(200).redirect("/brands")
     } catch (error) {
         res.status(500).json({
             error: "Failed to update brand"
@@ -55,12 +48,46 @@ export async function deleteBrand(req, res) {
 
         await deleteBrandQuery(id)
 
-        res.status(200).json({
-            message: "Brand deleted"
-        })
+        res.status(200).redirect("/brands")
     } catch (error) {
         res.status(500).json({
             error: "Failed to delete brand"
+        })
+    }
+}
+
+export async function getUpdateBrand(req, res) {
+    try {
+        const {id} = req.params
+        const brands = await getBrandByIdQuery(id)
+
+        res.render("updateBrand", {brands: brands.rows})
+    } catch (error) {
+        res.status(500).json({
+            error: "Internal server error"
+        })
+    }
+}
+
+export async function addBrand(req, res) {
+    try {
+        res.status(200).render("add-brand")
+    } catch (error) {
+        res.status(500).json({
+            error: "Internal server error"
+        })
+    }
+}
+
+export async function brandDeletionConf(req, res) {
+    try {
+        const {id} = req.params
+        const brands = await getBrandByIdQuery(id)
+
+        res.status(200).render("brandDeletionConf", {brands: brands.rows[0]})
+    } catch (error) {
+        res.status(500).json({
+            error: "Internal server error"
         })
     }
 }

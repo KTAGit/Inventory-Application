@@ -1,0 +1,24 @@
+<div class="tint">
+
+    <section class="update-brand-section">
+    <div class="title-wrapper">
+        <h1>Update Brand</h1>
+    </div>
+    
+        <%brands.forEach((brand) => {%>
+            <form action="/brands/<%=brand.id%>" method="POST">
+                <div class="name-wrapper">
+                    <label for="name">BRAND NAME*</label>
+                    <input type="text" name="name" value="<%=brand.name%>" placeholder="e.g. Fender, Gibson, Yamaha" required >
+                </div>
+                <div class="button-wrapper">
+                    <a class="delete-button" href="/brands/delete/<%=brand.id%>">DELETE</a>
+                    <button class="update-category-button" type="submit">UPDATE BRAND</button>
+                </div>
+            </form>
+        <%})%>
+
+                
+</section>
+
+</div>

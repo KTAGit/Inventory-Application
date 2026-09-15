@@ -7,7 +7,10 @@ export function createBrandQuery(brandName){
 }
 
 export function getbrandsQuery(){
-    return pool.query(`SELECT * FROM brands`)
+    return pool.query(`SELECT brands.*, COUNT(products.name) FROM brands
+        LEFT JOIN products ON products.brand = brands.id
+        GROUP BY brands.id
+        `)
 }
 
 export function updateBrandQuery(id, brandName){
@@ -21,4 +24,9 @@ export function deleteBrandQuery(id){
     return pool.query(`DELETE FROM brands 
         WHERE id = ($1)
          `, [id])
+}
+
+export function getBrandByIdQuery(id) {
+    return pool.query(`SELECT * FROM brands 
+        WHERE id = ($1)`,[id])
 }

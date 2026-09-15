@@ -1,0 +1,28 @@
+<div class="tint">
+
+    <section class="update-category-section">
+    <div class="title-wrapper">
+        <h1>Update Category</h1>
+    </div>
+    
+        <%category.forEach((category) => {%>
+            <form action="/categories/<%=category.id%>" method="POST">
+                <div class="name-wrapper">
+                    <label for="name">CATEGORY NAME*</label>
+                    <input type="text" name="name" value="<%=category.name%>" placeholder="e.g. Electric Guitars" required >
+                </div>
+                <div class="description-wrapper">
+                    <label for="description">DESCRIPTION</label>
+                    <textarea name="description" placeholder="Briefly describe the instruments in this category..."><%=category.description%></textarea>
+                </div>
+                <div class="button-wrapper">
+                    <a class="delete-button" href="/categories/delete/<%=category.id%>">DELETE</a>
+                    <button class="update-category-button" type="submit">UPDATE CATEGORY</button>
+                </div>
+            </form>
+        <%})%>
+
+                
+</section>
+
+</div>

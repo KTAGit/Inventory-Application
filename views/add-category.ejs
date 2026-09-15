@@ -1,0 +1,24 @@
+<div class="tint">
+
+    <section class="add-category-section">
+    <div class="title-wrapper">
+        <h1>Create Category</h1>
+    </div>
+    <form action="/categories/create-category" method="POST">
+        <div class="name-wrapper">
+            <label for="categoryName">CATEGORY NAME*</label>
+            <input type="text" name="categoryName" placeholder="e.g. Electric Guitars" required >
+        </div>
+        <div class="description-wrapper">
+            <label for="description">DESCRIPTION</label>
+            <textarea name="description" id="" placeholder="Briefly describe the instruments in this category..."></textarea>
+        </div>
+
+        <div class="button-wrapper">
+            <a class="cancel-button" href="/categories">CANCEL</a>
+            <button class="add-category-button" type="submit">ADD CATEGORY</button>
+        </div>
+    </form>
+</section>
+
+</div>

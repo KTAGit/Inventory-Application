@@ -7,11 +7,14 @@ export function createCategoryQuery(categoryName, description){
 }
 
 export function getCategoriesQuery(){
-    return pool.query(`SELECT * FROM categories`)
+    return pool.query(`SELECT categories.*, COUNT(products.name) FROM categories 
+        LEFT JOIN products ON products.category_id = categories.id
+        GROUP BY categories.id
+        `)
 }
 
-export async function getCategoryById(id) {
-    const result = await pool.query(`SELECT name FROM categories WHERE id = ($1)`, [id])
+export async function getCategoryByIdQuery(id) {
+    const result = await pool.query(`SELECT id ,name, description FROM categories WHERE id = ($1)`, [id])
     return result.rows
 }
 

@@ -1,0 +1,23 @@
+<section class="brands-section">
+    <div class="brands-heading">
+        <div class="title-wrapper">
+            <h1>Brands</h1>
+            <p>The names behind the instruments.</p>
+        </div>
+        <div class="add-brand-wrapper">
+            <a class="add-category-button" href="brands/add-brand">+ Add Brand</a>
+        </div>
+    </div>
+    <div class="categories-container">
+            <%brands.forEach((brand) => {%>
+                <a href="/brands/<%=brand.id%>">
+                    <div class="category-wrapper" >
+                    <div class="title-itemcount-wrapper">
+                        <h3 class="category-title"><%=brand.name%></h3>
+                        <span class="item-count"><%=brand.count%><%=brand.count == 1 ? ' ITEM' : ' ITEMS'%></span>
+                    </div>
+                    </div>
+                </a>
+            <%})%>
+        </div>
+</section>

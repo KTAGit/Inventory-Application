@@ -1,0 +1,21 @@
+<div class="tint">
+
+<section class="delete-category-section">
+    <div class="delete-confirmation-title-wrapper">
+        <h2>Remove this category?</h2>
+        <div class="image-name-wrapper">
+            <div>
+                <p class="category-name">Category Name: <%=categoryName%></p>
+            </div>
+        </div>
+        <p class="warning-message">This will permanently remove this category from your inventory. This action cannot be undone.</p>
+    </div>
+    <form action="/categories/delete/<%=categoryId%>" method="POST">
+        <div class="delete-confirmation-button-wrapper">
+            <a class="cancel-button" href="/categories">CANCEL</a>
+            <button class="delete-button" type="submit">DELETE CATEGORY</button>
+        </div>
+    </form>
+</section>
+
+</div>
