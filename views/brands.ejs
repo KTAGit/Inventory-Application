@@ -8,11 +8,11 @@
             <a class="add-category-button" href="brands/add-brand">+ Add Brand</a>
         </div>
     </div>
-    <div class="categories-container">
+    <div class="brands-container">
             <%brands.forEach((brand) => {%>
                 <a href="/brands/<%=brand.id%>">
-                    <div class="category-wrapper" >
-                    <div class="title-itemcount-wrapper">
+                    <div class="brand-wrapper" >
+                    <div class="title-itemcount-wrapper brand">
                         <h3 class="category-title"><%=brand.name%></h3>
                         <span class="item-count"><%=brand.count%><%=brand.count == 1 ? ' PRODUCT' : ' PRODUCTS'%></span>
                     </div>

@@ -7,6 +7,11 @@
     <title>SoundHouse</title>
 </head>
 <body>
+    <div class="sidebar-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
     <aside>
         <%- include('./sidebar.ejs')%>
     </aside>
@@ -18,11 +23,24 @@
 </body>
 <script>
     const sections = document.querySelectorAll(".sections-container > a")
+    const toggleBtn = document.querySelector(".sidebar-toggle")
+    const aside = document.querySelector("aside")
     sections.forEach((section) => {
         if (section.href === window.location.href) {
             section.classList.add("highlight-section")   
         }
     })
-    
+
+    toggleBtn.addEventListener("click", () => {
+        if (aside.style.display === "none" || aside.style.display === "") {
+            aside.style.display = "block"
+            toggleBtn.style.left = "270px"
+        }else {
+            aside.style.display = "block"
+            aside.style.display = "none"
+            toggleBtn.style.left = "13px"
+        }
+    })
+
 </script>
 </html>

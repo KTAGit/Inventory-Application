@@ -29,7 +29,7 @@
                 </div> 
                 <p class="title"> ><%=card.itemName%></p> 
                 <p class="stock-count">
-                    <span style="color: <%=card.stockCount < 5 ? '#B91A1A' : card.stockCount < 10 ? '#F3A161': 'black'%>;">•</span>
+                    <span style="color: <%=card.stockCount < 5 ? '#B91A1A' : card.stockCount < 10 ? '#F3A161': '#698F5E'%>;">•</span>
                     <%=card.stockCount < 10 ? 'Low Stock' : 'In Stock' %> (<%=card.stockCount%>)
                 </p>
             </div> 
