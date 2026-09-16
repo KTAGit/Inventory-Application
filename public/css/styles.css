@@ -78,6 +78,10 @@ aside {
     }
 }
 
+.sections-container > a:hover {
+    cursor: pointer;
+}
+
 .main-content {
     min-height: 0;
     overflow: hidden;
@@ -693,3 +697,13 @@ aside {
         text-decoration: underline;
     }
 }
+
+.highlight-section {
+    background-color: #1D1D1D;
+    div > span {
+        color: #a1a1a0;
+        font-weight: bold;
+    }
+}
+
+

@@ -16,4 +16,13 @@
     </section>
 
 </body>
+<script>
+    const sections = document.querySelectorAll(".sections-container > a")
+    sections.forEach((section) => {
+        if (section.href === window.location.href) {
+            section.classList.add("highlight-section")   
+        }
+    })
+    
+</script>
 </html>
