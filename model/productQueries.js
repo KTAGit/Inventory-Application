@@ -37,3 +37,8 @@ export function getProductByIdQuery(id) {
         WHERE id = ($1)
         `,[id])
 }
+
+export function searchProductQuery(searchTerm) {
+    return pool.query(`SELECT * FROM products
+        WHERE name ILIKE '%' || ($1) || '%'`, [searchTerm])
+}

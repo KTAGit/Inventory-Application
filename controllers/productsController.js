@@ -2,7 +2,7 @@ import { createProductQuery, getProductsQuery, updateProductQuery, deleteProduct
 import { getCategoryByIdQuery } from "../model/categoryQueries.js";
 import { getCategoriesQuery } from "../model/categoryQueries.js";
 import { getbrandsQuery } from "../model/brandsQueries.js";
-import { getProductByIdQuery } from "../model/productQueries.js";
+import { getProductByIdQuery, searchProductQuery } from "../model/productQueries.js";
 
 export async function createProduct(req, res) {
     try {
@@ -137,6 +137,20 @@ export async function deleteConfirmation(req, res) {
             category: category[0]
         }
         res.status(200).render("deleteConfirmation", {product: result})
+    } catch (error) {
+        res.status(500).json({
+            error: "Internal server error"
+        })
+    }
+}
+
+export async function searchProduct(req, res) {
+    try {
+        const {searchTerm} = req.query
+        const products = await searchProductQuery(searchTerm)
+        const finalResult =  await getProductWithCateogry(products)
+        
+        res.status(200).render("products", {products: finalResult})
     } catch (error) {
         res.status(500).json({
             error: "Internal server error"
