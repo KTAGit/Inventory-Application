@@ -33,16 +33,38 @@
             <div class="categories-wrapper">
                 <label for="category">CATEGORY*</label>
                 <select name="categoryId" id="" required>
-                    
-                    <%categories.map((category) => { %>
-                        <%if(category.id === product.category_id) {%>
-                            <option value="<%=category.id%>" selected><%=category.name%></option>
-                        <%}%>
-                        <%if(category.id !== product.category_id) {%>
-                            <option value=<%=category.id%>><%=category.name%></option>
-                        <%}%>  
-                    <% })%>
+                    <% categories.forEach((category) => { %>
+
+                        <% if (category.id === product.category_id) { %>
+
+                            <% if (!category.isactive) { %>
+                                <option value="<%= category.id %>" selected disabled>
+                                    <%= category.name %>
+                                </option>
+                            <% } else { %>
+                                <option value="<%= category.id %>" selected>
+                                    <%= category.name %>
+                                </option>
+                            <% } %>
+
+                        <% } else if (category.isactive) { %>
+
+                            <option value="<%= category.id %>">
+                                <%= category.name %>
+                            </option>
+
+                        <% } %>
+
+                    <% }) %>
                 </select>
+
+                <% if (!categories.find(c => c.id === product.category_id)?.isactive) { %>
+                    <input
+                        type="hidden"
+                        name="category_id"
+                        value="<%= product.category_id %>"
+                    >
+                <% } %>
             </div>
         </div>
         <div class="price-stock-wrapper">

@@ -42,3 +42,9 @@ export function searchProductQuery(searchTerm) {
     return pool.query(`SELECT * FROM products
         WHERE name ILIKE '%' || ($1) || '%'`, [searchTerm])
 }
+
+export function checkIfCategoryExistQuery(category_id) {
+    return pool.query(`SELECT * FROM products
+        WHERE category_id = ($1)
+        `, [category_id])
+}

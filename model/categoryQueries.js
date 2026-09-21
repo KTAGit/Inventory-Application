@@ -30,3 +30,10 @@ export function deleteCategoryQuery(id){
         WHERE id = ($1)
          `, [id])
 }
+
+export function removeCategoryFromList(id) {
+    return pool.query(`UPDATE categories
+        SET isactive = ($1)
+        WHERE id = ($2)
+        `, [false, id])
+}

@@ -20,7 +20,9 @@
                 <select name="brandId" id="" required>
                     <option value="" disabled selected>Select Brand</option>
                     <%brands.map((brand) => { %>
-                        <option value=<%=brand.id%>><%=brand.name%></option>
+                        <%if(brand.isactive) {%>
+                            <option value=<%=brand.id%>><%=brand.name%></option>
+                        <%}%>
                     <% })%>
                 </select>
             </div>
@@ -30,7 +32,10 @@
                 <select name="categoryId" id="" required>
                     <option value="" disabled selected>Select Category</option>
                     <%categories.map((category) => { %>
-                        <option value=<%=category.id%>><%=category.name%></option>
+                        <%if(category.isactive) {%>
+                            <option value=<%=category.id%>><%=category.name%></option>
+                        <%}%>
+                        
                     <% })%>
                 </select>
             </div>
@@ -49,7 +54,7 @@
             <label for="condition">CONDITION</label>
             <div class="radio-input-wrapper">
                 <div>
-                    <input type="radio" name="condition" value="Brand New" id="">
+                    <input type="radio" name="condition" value="New" id="">
                     <label for="Brand New">Brand New</label>
                 </div>
                 <div>   
@@ -57,7 +62,7 @@
                     <label for="Mint">Mint</label>
                 </div>
                 <div>   
-                    <input type="radio" name="condition" value="Used (Good)" id="">
+                    <input type="radio" name="condition" value="Used" id="">
                     <label for="Used (Good)">Used (Good)</label>
                 </div>
                 <div>

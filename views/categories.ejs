@@ -10,15 +10,17 @@
     </div>
     <div class="categories-container">
             <%categories.forEach((category) => {%>
-                <a href="/categories/<%=category.id%>">
-                    <div class="category-wrapper" >
-                    <div class="title-itemcount-wrapper">
-                        <h3 class="category-title"><%=category.name%></h3>
-                        <span class="item-count"><%=category.count%><%=category.count == 1 ? ' ITEM' : ' ITEMS'%></span>
-                    </div>
-                    <p class="category-description"><%=category.description%></p>
-                    </div>
-                </a>
+                <%if(category.isactive){%>
+                    <a href="/categories/<%=category.id%>">
+                        <div class="category-wrapper" >
+                            <div class="title-itemcount-wrapper">
+                                <h3 class="category-title"><%=category.name%></h3>
+                                <span class="item-count"><%=category.count%><%=category.count == 1 ? ' ITEM' : ' ITEMS'%></span>
+                            </div>
+                            <p class="category-description"><%=category.description%></p>
+                        </div>
+                    </a>
+                <%}%>
             <%})%>
         </div>
 </section>

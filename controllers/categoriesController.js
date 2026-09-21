@@ -1,4 +1,5 @@
-import { createCategoryQuery, getCategoriesQuery, updateCategoryQuery, deleteCategoryQuery, getCategoryByIdQuery } from "../model/categoryQueries.js";
+import { removeCategoryFromList, createCategoryQuery, getCategoriesQuery, updateCategoryQuery, deleteCategoryQuery, getCategoryByIdQuery } from "../model/categoryQueries.js";
+import { checkIfCategoryExist } from "./productsController.js";
 
 
 export async function createCategory(req, res) {
@@ -45,7 +46,8 @@ export async function updateCategory(req, res) {
 export async function deleteCategory(req, res) {
     try {
         const {id} = req.params        
-        await deleteCategoryQuery(id)
+        const isProductReferenceCategory = await checkIfCategoryExist(id)
+        isProductReferenceCategory ? await removeCategoryFromList(id) : await deleteCategoryQuery(id)
 
         res.status(200).redirect("/categories")
     } catch (error) {

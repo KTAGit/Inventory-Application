@@ -7,14 +7,16 @@ export async function createTables(){
         `CREATE TABLE IF NOT EXISTS categories (
             id SERIAL PRIMARY KEY,
             name TEXT NOT NULL UNIQUE,
-            description TEXT NOT NULL
+            description TEXT NOT NULL,
+            isActive BOOLEAN NOT NULL DEFAULT true
         )`
     )
 
     await pool.query(
         `CREATE TABLE IF NOT EXISTS brands (
             id SERIAL PRIMARY KEY,
-            name TEXT NOT NULL UNIQUE
+            name TEXT NOT NULL UNIQUE,
+            isActive BOOLEAN NOT NULL DEFAULT true
         )`
     )
 

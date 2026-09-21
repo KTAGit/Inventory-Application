@@ -166,6 +166,7 @@ aside {
 
 .recent-stock-items-container {
     max-width: 95%;
+    min-width: 95%;
     display: grid;
     grid-template-columns: 1fr .5fr;
     gap: 20px;
@@ -259,6 +260,7 @@ aside {
     padding: 20px;
     border: 1px solid #8685846e;
     min-height: 200px;
+    min-width: fit-content;
     h2 {
         display: flex;
         text-align: center;
@@ -266,6 +268,7 @@ aside {
         border-bottom: 1px solid #8685846e;
         font-family: "PlayfairDisplay";
         padding-bottom: 5px;
+        text-wrap: nowrap;
         img {
             width: 25px;
             height: 25px;
@@ -433,7 +436,8 @@ aside {
 }
 
 .filter-wrapper {
-    button {
+    form {
+        button {
         font-family: "Inter";
         padding-top: 5px;
         padding-bottom: 5px;
@@ -441,10 +445,12 @@ aside {
         padding-right: 15px;
         border: 1px solid #8685846e;
         background-color: transparent;
+        }
+        button:hover {
+            cursor: pointer;
+        }
     }
-    button:hover {
-        cursor: pointer;
-    }
+    
 }
 
 .stock-count {
@@ -898,6 +904,13 @@ aside {
         }
         .categories-container-overview {
             border: none;
+        }
+    }
+    .search-filter-wrapper {
+        form {
+            button {
+                margin-top: 10px;
+            }
         }
     }
 }

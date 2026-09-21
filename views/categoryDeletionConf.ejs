@@ -8,7 +8,7 @@
                 <p class="category-name">Category Name: <%=categoryName%></p>
             </div>
         </div>
-        <p class="warning-message">This will permanently remove this category from your inventory. This action cannot be undone.</p>
+        <p class="warning-message">This will remove the category from your category list. Products already assigned to this category will keep their category, but it will no longer be available as a category choice. This action cannot be undone.</p>
     </div>
     <form action="/categories/delete/<%=categoryId%>" method="POST">
         <div class="delete-confirmation-button-wrapper">
