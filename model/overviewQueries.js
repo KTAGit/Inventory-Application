@@ -12,11 +12,13 @@ export async function inventoryValueQuery(){
 }
 
 export async function categoryCountQuery(){
-    const result = await pool.query(`SELECT COUNT(*) FROM categories`)
+    const result = await pool.query(`SELECT COUNT(*) FROM categories 
+        WHERE isactive = true`)
     return result.rows[0]
 }
 
 export async function brandCountQuery(){
-    const result = await pool.query(`SELECT COUNT(*) FROM brands`)
+    const result = await pool.query(`SELECT COUNT(*) FROM brands 
+        WHERE isactive = true`)
     return result.rows[0]
 }
