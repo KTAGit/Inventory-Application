@@ -1,4 +1,4 @@
-import { createProductQuery, getProductsQuery, updateProductQuery, deleteProductQuery, checkIfCategoryExistQuery } from "../model/productQueries.js";
+import { createProductQuery, getProductsQuery, updateProductQuery, deleteProductQuery, checkIfCategoryExistQuery, checkIfBrandExistQuery } from "../model/productQueries.js";
 import { getCategoryByIdQuery } from "../model/categoryQueries.js";
 import { getCategoriesQuery } from "../model/categoryQueries.js";
 import { getbrandsQuery } from "../model/brandsQueries.js";
@@ -34,7 +34,8 @@ export async function updateProduct(req, res) {
         const {id} = req.params
         const {productName, description, brandId, categoryId, currentStock, price, condition, imgUrl} = req.body
         const category_id = typeof categoryId === "object" ? Number(categoryId[0]) : categoryId
-        await updateProductQuery(id ,productName, description, brandId, category_id, currentStock, price, condition, imgUrl)
+        const brand_id = typeof brandId === "object" ? Number(brandId[0]) : brandId
+        await updateProductQuery(id ,productName, description, brand_id, category_id, currentStock, price, condition, imgUrl)
         res.status(200).redirect("/products")
     } catch (error) {
         res.status(500).json({
@@ -160,5 +161,10 @@ export async function searchProduct(req, res) {
 
 export async function checkIfCategoryExist(category_id) {
     const result = await checkIfCategoryExistQuery(category_id)
+    return result.rows.length === 0 ? false : true
+}
+
+export async function checkIfBrandExist(brand_id) {
+    const result = await checkIfBrandExistQuery(brand_id)
     return result.rows.length === 0 ? false : true
 }

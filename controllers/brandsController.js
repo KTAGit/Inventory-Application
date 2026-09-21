@@ -1,4 +1,5 @@
-import { createBrandQuery, getbrandsQuery, updateBrandQuery, deleteBrandQuery, getBrandByIdQuery } from "../model/brandsQueries.js";
+import { removeBrandFromList, createBrandQuery, getbrandsQuery, updateBrandQuery, deleteBrandQuery, getBrandByIdQuery } from "../model/brandsQueries.js";
+import { checkIfBrandExist } from "./productsController.js";
 
 
 export async function createBrand(req, res) {
@@ -45,8 +46,8 @@ export async function updateBrand(req, res) {
 export async function deleteBrand(req, res) {
     try {
         const {id} = req.params
-
-        await deleteBrandQuery(id)
+        const isProductReferenceBrand = await checkIfBrandExist(id)
+        isProductReferenceBrand ? await removeBrandFromList(id) : await deleteBrandQuery(id)
 
         res.status(200).redirect("/brands")
     } catch (error) {

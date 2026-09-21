@@ -48,3 +48,9 @@ export function checkIfCategoryExistQuery(category_id) {
         WHERE category_id = ($1)
         `, [category_id])
 }
+
+export function checkIfBrandExistQuery(brand_id) {
+    return pool.query(`SELECT * FROM products
+        WHERE brand = ($1)
+        `, [brand_id])
+}

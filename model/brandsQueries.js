@@ -30,3 +30,10 @@ export function getBrandByIdQuery(id) {
     return pool.query(`SELECT * FROM brands 
         WHERE id = ($1)`,[id])
 }
+
+export function removeBrandFromList(id) {
+    return pool.query(`UPDATE brands
+        SET isactive = ($1)
+        WHERE id = ($2)
+        `, [false, id])
+}

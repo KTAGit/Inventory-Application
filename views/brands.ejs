@@ -9,8 +9,9 @@
         </div>
     </div>
     <div class="brands-container">
-            <%brands.forEach((brand) => {%>
-                <a href="/brands/<%=brand.id%>">
+            <%brands.forEach((brand) => {%> 
+                <%if(brand.isactive){%>
+                    <a href="/brands/<%=brand.id%>">
                     <div class="brand-wrapper" >
                     <div class="title-itemcount-wrapper brand">
                         <h3 class="category-title"><%=brand.name%></h3>
@@ -18,6 +19,7 @@
                     </div>
                     </div>
                 </a>
+                <%}%>
             <%})%>
         </div>
 </section>
