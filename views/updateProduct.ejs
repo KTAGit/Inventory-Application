@@ -61,7 +61,7 @@
                 <% if (!categories.find(c => c.id === product.category_id)?.isactive) { %>
                     <input
                         type="hidden"
-                        name="category_id"
+                        name="categoryId"
                         value="<%= product.category_id %>"
                     >
                 <% } %>
