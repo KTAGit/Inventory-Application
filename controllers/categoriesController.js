@@ -1,4 +1,4 @@
-import { removeCategoryFromList, createCategoryQuery, getCategoriesQuery, updateCategoryQuery, deleteCategoryQuery, getCategoryByIdQuery } from "../model/categoryQueries.js";
+import { getCategoryByName, removeCategoryFromList, createCategoryQuery, getCategoriesQuery, updateCategoryQuery, deleteCategoryQuery, getCategoryByIdQuery } from "../model/categoryQueries.js";
 import { checkIfCategoryExist } from "./productsController.js";
 
 
@@ -6,14 +6,31 @@ export async function createCategory(req, res) {
     try {
         const {categoryName, description} = req.body
 
-        await createCategoryQuery(categoryName, description)
+        const result = await createCategoryQuery(categoryName, description)
 
-        res.status(201).redirect("/categories")
+        if (result.rows.length > 0) {
+            return res.status(201).redirect("/categories")
+        }
+
+        const existing = await getCategoryByName(categoryName)
+        const category = existing.rows[0]
+
+        if (!category.isactive) {
+            await updateCategoryQuery(
+                category.id,
+                categoryName,
+                description ? description : category.description,
+                true
+            )
+            return res.status(201).redirect("/categories")
+        }
+
+        return res.status(409).render("error", {
+            error: "A category with this name already exists. Please choose a different name."
+        })
+    
     } catch (error) {
-        error.code === "23505" ? 
-        res.status(500).render("error", {error: "A category with this name already exists. Please choose a different name."}) :
         res.status(500).render("error", {error: "Error creating category."})
-        
     }
 }
 
@@ -31,9 +48,13 @@ export async function updateCategory(req, res) {
     try {
         const {id} = req.params
         const {name, description} = req.body
-
-        await updateCategoryQuery(id ,name, description)
-
+        const category = await getCategoryByIdQuery(id)
+        await updateCategoryQuery(
+            id,
+            name ? name : category[0].name,
+            description ? description : category[0].description,
+            category[0].isactive
+        )
         res.status(200).redirect("/categories")
     } catch (error) {
         error.code === "23505" ? 

@@ -3,6 +3,9 @@ import { pool } from "./db.js";
 export function createBrandQuery(brandName){
     return pool.query(`INSERT INTO brands (name) 
         VALUES ($1)
+        ON CONFLICT (name)
+        DO NOTHING
+        RETURNING *
         `, [brandName])
 }
 
@@ -13,11 +16,11 @@ export function getbrandsQuery(){
         `)
 }
 
-export function updateBrandQuery(id, brandName){
+export function updateBrandQuery(id, brandName, status){
     return pool.query(`UPDATE brands
-        SET name = ($1)
-        WHERE id = ($2)
-        `, [brandName, id])
+        SET name = ($1), isactive = ($2)
+        WHERE id = ($3)
+        `, [brandName, status, id])
 }
 
 export function deleteBrandQuery(id){
@@ -36,4 +39,10 @@ export function removeBrandFromList(id) {
         SET isactive = ($1)
         WHERE id = ($2)
         `, [false, id])
+}
+
+export function getBrandByName(brandName) {
+    return pool.query(`SELECT * FROM brands
+        WHERE name = $1
+        `, [brandName])
 }

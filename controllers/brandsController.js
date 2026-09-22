@@ -1,14 +1,31 @@
-import { removeBrandFromList, createBrandQuery, getbrandsQuery, updateBrandQuery, deleteBrandQuery, getBrandByIdQuery } from "../model/brandsQueries.js";
+import { removeBrandFromList, getBrandByName, createBrandQuery, getbrandsQuery, updateBrandQuery, deleteBrandQuery, getBrandByIdQuery } from "../model/brandsQueries.js";
 import { checkIfBrandExist } from "./productsController.js";
 
 
 export async function createBrand(req, res) {
     try {
         const {brandName} = req.body
+        const result = await createBrandQuery(brandName)
         
-        await createBrandQuery(brandName)
-
-        res.status(201).redirect("/brands")
+            if (result.rows.length > 0) {
+                return res.status(201).redirect("/brands")
+            }
+        
+            const existing = await getBrandByName(brandName)
+            const brand = existing.rows[0]
+        
+            if (!brand.isactive) {
+                await updateBrandQuery(
+                    brand.id,
+                    brandName,
+                    true
+                )
+                return res.status(201).redirect("/brands")
+            }
+        
+            return res.status(409).render("error", {
+                error: "A brand with this name already exists. Please choose a different name."
+            })
     } catch (error) {
         error.code === "23505" ? 
         res.status(500).render("error", {error: "A brand with this name already exists. Please choose a different name."}) :
@@ -30,8 +47,13 @@ export async function updateBrand(req, res) {
     try {
         const {id} = req.params
         const {name} = req.body
+        const brand = await getBrandByIdQuery(id)
 
-        await updateBrandQuery(id ,name)
+        await updateBrandQuery(
+            id,
+            name ? name : brand.rows[0].name,
+            brand.rows[0].isactive
+        )
 
         res.status(200).redirect("/brands")
     } catch (error) {
