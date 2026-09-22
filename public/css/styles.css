@@ -352,6 +352,12 @@ aside {
         font-weight: 300;
         color: #0b0b0bee;
     }
+    .error {
+        color:#D0645F;
+    }
+    .error-message {
+        padding: 20px;
+    }
 }
 
 .add-product-wrapper,.add-category-wrapper,.add-brand-wrapper {
@@ -465,7 +471,7 @@ aside {
     }
 }
 
-.add-product-section,.add-category-section,.update-category-section,.add-brand-section,.update-brand-section {
+.add-product-section,.add-category-section,.update-category-section,.add-brand-section,.update-brand-section,.error-section {
     padding-top: 50px;
     display: flex;
     flex-direction: column;
@@ -595,6 +601,10 @@ aside {
     width: 100%;
     padding-top: 5dvh;
     background-image: linear-gradient(rgba(0,0,0,0.5));
+}
+
+.tint.error {
+    background-image: none;
 }
 
 .image-name-wrapper {

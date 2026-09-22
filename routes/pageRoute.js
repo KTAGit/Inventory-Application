@@ -50,5 +50,10 @@ router.post("/brands/:id", updateBrand)
 router.get("/brands/delete/:id", brandDeletionConf)
 router.post("/brands/delete/:id", deleteBrand)
 
+router.use((req, res) => {
+    res.status(404).render("error", {
+        error: "Page not found"
+    });
+})
 
 export default router

@@ -26,11 +26,6 @@ app.set("layout", "layout")
 app.use("/", router)
 
 
-
-
-
-
-
 const PORT = process.env.PORT
 
 async function startServer() {

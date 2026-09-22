@@ -10,9 +10,9 @@ export async function createBrand(req, res) {
 
         res.status(201).redirect("/brands")
     } catch (error) {
-        res.status(500).json({
-            error: "Failed to create brand"
-        })
+        error.code === "23505" ? 
+        res.status(500).render("error", {error: "A brand with this name already exists. Please choose a different name."}) :
+        res.status(500).render("error", {error: "Failed to create brand"})
     }
 }
 
@@ -22,9 +22,7 @@ export async function getbrands(req, res) {
 
         res.status(200).render("brands", {brands: result.rows})
     } catch (error) {
-        res.status(500).json({
-            error: "Failed to retrieve brands"
-        })
+        res.status(500).render("error", {error: "Failed to retrieve brands"})
     }
 }
 
@@ -37,9 +35,9 @@ export async function updateBrand(req, res) {
 
         res.status(200).redirect("/brands")
     } catch (error) {
-        res.status(500).json({
-            error: "Failed to update brand"
-        })
+        error.code === "23505" ? 
+        res.status(500).render("error", {error: "A brand with this name already exists. Please choose a different name."}) :
+        res.status(500).render("error", {error: "Internal server error"})
     }
 }
 
@@ -51,9 +49,7 @@ export async function deleteBrand(req, res) {
 
         res.status(200).redirect("/brands")
     } catch (error) {
-        res.status(500).json({
-            error: "Failed to delete brand"
-        })
+        res.status(500).render("error", {error: "Failed to delete brand"})
     }
 }
 
@@ -64,9 +60,9 @@ export async function getUpdateBrand(req, res) {
 
         res.render("updateBrand", {brands: brands.rows})
     } catch (error) {
-        res.status(500).json({
-            error: "Internal server error"
-        })
+        error.code === "23505" ? 
+        res.status(500).render("error", {error: "A brand with this name already exists. Please choose a different name."}) :
+        res.status(500).render("error", {error: "Internal server error"})
     }
 }
 
@@ -74,9 +70,9 @@ export async function addBrand(req, res) {
     try {
         res.status(200).render("add-brand")
     } catch (error) {
-        res.status(500).json({
-            error: "Internal server error"
-        })
+        error.code === "23505" ? 
+        res.status(500).render("error", {error: "A brand with this name already exists. Please choose a different name."}) :
+        res.status(500).render("error", {error: "Failed to create brand"})
     }
 }
 

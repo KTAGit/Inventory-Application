@@ -23,9 +23,7 @@ export async function getProducts(req, res) {
         const finalResult = await getProductWithCateogry(result)
         res.status(200).render("products", {products: finalResult})
     } catch (error) {
-        res.status(500).json({
-            error: "Failed to retrieve products"
-        })
+        res.status(500).render("error", {error: "Failed to retrieve products"})
     }
 }
 
@@ -38,9 +36,9 @@ export async function updateProduct(req, res) {
         await updateProductQuery(id ,productName, description, brand_id, category_id, currentStock, price, condition, imgUrl)
         res.status(200).redirect("/products")
     } catch (error) {
-        res.status(500).json({
-            error: "Failed to update product"
-        })
+        error.code === "23505" ? 
+        res.status(500).render("error", {error: "A product with this name already exists. Please choose a different name."}) :
+        res.status(500).render("error", {error: "Failed to update product"})
     }
 }
 
@@ -52,9 +50,7 @@ export async function deleteProduct(req, res) {
 
         res.redirect("/products")
     } catch (error) {
-        res.status(500).json({
-            error: "Failed to delete product"
-        })
+        res.status(500).render("error", {error: "Failed to delete product"})
     }
 }
 
@@ -91,9 +87,9 @@ export async function addProduct(req, res) {
             }
         )
     } catch (error) {
-        res.status(500).json({
-            error: "Internal server error"
-        })
+        error.code === "23505" ? 
+        res.status(500).render("error", {error: "A product with this name already exists. Please choose a different name."}) :
+        res.status(500).render("error", {error: "Failed to add product"})
     }
 
 }
@@ -119,9 +115,7 @@ export async function getProductById(req, res) {
 
         res.status(200).render("updateProduct", {product:result, brands: brands.rows, categories: categories.rows})
     } catch (error) {
-        res.status(500).json({
-            error: "Internal server error"
-        })
+        res.status(500).render("error", {error: "Internal server error"})
     }
 }
 
@@ -139,9 +133,7 @@ export async function deleteConfirmation(req, res) {
         }
         res.status(200).render("deleteConfirmation", {product: result})
     } catch (error) {
-        res.status(500).json({
-            error: "Internal server error"
-        })
+        res.status(500).render("error", {error: "Internal server error"})
     }
 }
 
@@ -153,9 +145,7 @@ export async function searchProduct(req, res) {
         
         res.status(200).render("products", {products: finalResult})
     } catch (error) {
-        res.status(500).json({
-            error: "Internal server error"
-        })
+        res.status(500).render("error", {error: "Error searching product"})
     }
 }
 

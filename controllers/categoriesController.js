@@ -10,9 +10,10 @@ export async function createCategory(req, res) {
 
         res.status(201).redirect("/categories")
     } catch (error) {
-        res.status(500).json({
-            error: "Failed to create category"
-        })
+        error.code === "23505" ? 
+        res.status(500).render("error", {error: "A category with this name already exists. Please choose a different name."}) :
+        res.status(500).render("error", {error: "Error creating category."})
+        
     }
 }
 
@@ -22,9 +23,7 @@ export async function getCategories(req, res) {
 
         res.status(200).render("categories", {categories: result.rows})
     } catch (error) {
-        res.status(500).json({
-            error: "Failed to retrieve categories"
-        })
+        res.status(500).render("error", {error: "Failed to retrieve categories"})
     }
 }
 
@@ -37,9 +36,9 @@ export async function updateCategory(req, res) {
 
         res.status(200).redirect("/categories")
     } catch (error) {
-        res.status(500).json({
-            error: "Failed to update category"
-        })
+        error.code === "23505" ? 
+        res.status(500).render("error", {error: "A category with this name already exists. Please choose a different name."}) :
+        res.status(500).render("error", {error: "Failed to update category"})
     }
 }
 
@@ -51,9 +50,7 @@ export async function deleteCategory(req, res) {
 
         res.status(200).redirect("/categories")
     } catch (error) {
-        res.status(500).json({
-            error: "Failed to delete category"
-        })
+        res.status(500).render("error", {error: "Failed to delete category"})
     }
 }
 
@@ -61,9 +58,7 @@ export async function addCategory(req, res) {
     try {
         res.render("add-category")
     } catch (error) {
-        res.status(500).json({
-            error: "Internal server error"
-        })
+        res.status(500).render("error", {error: "Internal server error"})
     }
 }
 
@@ -74,9 +69,7 @@ export async function getCategoryById(req, res) {
 
         res.render("updateCategory", {category: result})
     } catch (error) {
-        res.status(500).json({
-            error: "Internal server error"
-        })
+        res.status(500).render("error", {error: "Internal server error"})
     }
 }
 
@@ -87,8 +80,6 @@ export async function categoryDeletionConf(req, res) {
         
         res.render('categoryDeletionConf', {categoryName: result[0].name, categoryId: result[0].id})
     } catch (error) {
-        res.status(500).json({
-            error: "Internal server error"
-        })
+        res.status(500).render("error", {error: "Internal server error"})
     }
 }
