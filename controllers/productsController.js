@@ -45,6 +45,11 @@ export async function updateProduct(req, res) {
 export async function deleteProduct(req, res) {
     try {
         const {id} = req.params
+        const {admin} = req.body
+
+        if (admin !== process.env.DANGEROUS_ACTION_PASSWORD) {
+            return res.status(401).render("wrongpassword")
+        }
 
         await deleteProductQuery(id)
 

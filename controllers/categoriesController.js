@@ -65,7 +65,12 @@ export async function updateCategory(req, res) {
 
 export async function deleteCategory(req, res) {
     try {
-        const {id} = req.params        
+        const {id} = req.params      
+        const {admin} = req.body
+        
+        if (admin !== process.env.DANGEROUS_ACTION_PASSWORD) {
+            return res.status(401).render("wrongpassword")
+        }  
         const isProductReferenceCategory = await checkIfCategoryExist(id)
         isProductReferenceCategory ? await removeCategoryFromList(id) : await deleteCategoryQuery(id)
 

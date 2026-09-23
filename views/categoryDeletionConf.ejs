@@ -11,6 +11,10 @@
         <p class="warning-message">This will remove the category from your category list. Products already assigned to this category will keep their category, but it will no longer be available as a category choice. This action cannot be undone.</p>
     </div>
     <form action="/categories/delete/<%=categoryId%>" method="POST">
+        <div class="admin-input-wrapper">
+            <label for="admin">Admin Password*</label>
+            <input type="password" name="admin" required>
+        </div>
         <div class="delete-confirmation-button-wrapper">
             <a class="cancel-button" href="/categories">CANCEL</a>
             <button class="delete-button" type="submit">DELETE CATEGORY</button>

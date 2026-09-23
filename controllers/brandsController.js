@@ -66,6 +66,11 @@ export async function updateBrand(req, res) {
 export async function deleteBrand(req, res) {
     try {
         const {id} = req.params
+        const {admin} = req.body
+
+        if (admin !== process.env.DANGEROUS_ACTION_PASSWORD) {
+            return res.status(401).render("wrongpassword")
+        }
         const isProductReferenceBrand = await checkIfBrandExist(id)
         isProductReferenceBrand ? await removeBrandFromList(id) : await deleteBrandQuery(id)
 

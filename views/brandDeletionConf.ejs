@@ -11,6 +11,10 @@
         <p class="warning-message">This will remove the brand from your brand list. Products already assigned to this brand will keep their brand, but it will no longer be available as a brand choice. This action cannot be undone.</p>
     </div>
     <form action="/brands/delete/<%=brands.id%>" method="POST">
+        <div class="admin-input-wrapper">
+            <label for="admin">Admin Password*</label>
+            <input type="password" name="admin" required>
+        </div>
         <div class="delete-confirmation-button-wrapper">
             <a class="cancel-button" href="/brands">CANCEL</a>
             <button class="delete-button" type="submit">DELETE BRAND</button>

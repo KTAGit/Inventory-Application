@@ -13,6 +13,10 @@
         <p class="warning-message">This will permanently remove this product from your inventory. This action cannot be undone.</p>
     </div>
     <form action="/products/delete/<%=product.id%>" method="POST">
+        <div class="admin-input-wrapper">
+            <label for="admin">Admin Password*</label>
+            <input type="password" name="admin" required>
+        </div>
         <div class="delete-confirmation-button-wrapper">
             <a class="cancel-button" href="/products">CANCEL</a>
             <button class="delete-button" type="submit">DELETE PRODUCT</button>
